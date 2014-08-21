@@ -18,6 +18,7 @@
 		"silex/silex": "~1.2",
 		"twilio/sdk": "*"
 	},
-	"minimum-stability": "stable",
-	"preferred-install": "dist"
+	"autoload": {
+        "psr-0": { "Amassaro\\Silex\\Twilio": "src" }
+    }
 }

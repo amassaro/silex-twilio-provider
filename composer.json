@@ -1,9 +1,9 @@
 {
-    "name": "silex/twilio",
+    "name": "amassaro/silex-twilio-provider",
     "type": "library",
     "description": "Twilio Service Provider for Twilio API and TwiML support in Silex",
     "keywords": ["twilio","api","twiml"],
-    "homepage": "http://github.com/amassaro/silex-twilio",
+    "homepage": "http://github.com/amassaro/silex-twilio-provider",
     "license": "MIT",
     "authors": [
         {

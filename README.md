@@ -6,7 +6,7 @@ Twilio Service Provider for Twilio API and TwiML support in Silex
 
 ```text
 
-"amassaro\silex-twilio-provider" => "dev-master"
+"amassaro/silex-twilio-provider" => "dev-master"
 ```
 
 ###### Code Example

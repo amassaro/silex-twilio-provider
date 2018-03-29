@@ -29,7 +29,7 @@ class TwilioServiceProvider implements ServiceProviderInterface
                 throw new \Exception('twilio.auth_token is not defined!');
             }
 
-            return new new Client($app['twilio.sid'], $app['twilio.auth_token']);
+            return new Client($app['twilio.sid'], $app['twilio.auth_token']);
         });
 
         $app['twilio.twiml'] = $app->share(function () use ($app) {

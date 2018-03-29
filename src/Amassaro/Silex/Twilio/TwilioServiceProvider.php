@@ -4,6 +4,8 @@ namespace Amassaro\Silex\Twilio;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Twilio\Rest\Client;
+use Twilio\Twiml;
 
 /**
  * Twilio Service Provider for Twilio API and TwiML support in Silex.
@@ -27,11 +29,11 @@ class TwilioServiceProvider implements ServiceProviderInterface
                 throw new \Exception('twilio.auth_token is not defined!');
             }
 
-            return new \Services_Twilio($app['twilio.sid'], $app['twilio.auth_token']);
+            return new new Client($app['twilio.sid'], $app['twilio.auth_token']);
         });
 
         $app['twilio.twiml'] = $app->share(function () use ($app) {
-            return new \Services_Twilio_Twiml;
+            return new Twiml;
         });
     }
 

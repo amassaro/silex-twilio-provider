@@ -1,30 +1,32 @@
 <?php
 
-use Silex\Application;
+//declare(strict_types=1);
 
+use PHPUnit\Framework\TestCase;
+use Silex\Application;
+use Twilio\Twiml;
+use Twilio\Rest\Client;
 use Amassaro\Silex\Twilio\TwilioServiceProvider;
 
-class TwilioServiceProviderTest extends \PHPUnit_Framework_TestCase
+final class TwilioServiceProviderTest extends TestCase
 {
 
-	public function testContainerItemsNotNull()
+	public function testContainerItemsNotNull(): void
 	{
 
-		$app = new Application();
+		$app = new Application;
 
-		$app->register(new TwilioServiceProvider(),
-			array(
+		$app->register(new TwilioServiceProvider,
+			[
 				'twilio.sid' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
 				'twilio.auth_token' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-			)
+			]
 		);
 
-		$app->boot();
-
-		$this->assertNotNull($app['twilio.twiml']);
-		$this->assertInstanceOf('\\Services_Twilio_Twiml', $app['twilio.twiml']);
 		$this->assertNotNull($app['twilio.api']);
-		$this->assertInstanceOf('\\Services_Twilio', $app['twilio.api']);
+		$this->assertInstanceOf(Client::class, $app['twilio.api']);
+		$this->assertNotNull($app['twilio.twiml']);
+		$this->assertInstanceOf(Twiml::class, $app['twilio.twiml']);
 
 	}
 

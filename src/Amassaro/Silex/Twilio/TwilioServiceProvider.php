@@ -2,8 +2,8 @@
 
 namespace Amassaro\Silex\Twilio;
 
-use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Twilio\Rest\Client;
 use Twilio\Twiml;
 
@@ -14,31 +14,27 @@ use Twilio\Twiml;
  */
 class TwilioServiceProvider implements ServiceProviderInterface
 {
-    public function boot(Application $app)
+    public function register(Container $container)
     {
 
-        $app['twilio.api'] = $app->share(function () use ($app) {
+        $container['twilio.api'] = $container->protect(function () use ($container) {
 
-            if (empty($app['twilio.sid']))
+            if (empty($container['twilio.sid']))
             {
                 throw new \Exception('twilio.sid is not defined!');
             }
 
-            if (empty($app['twilio.auth_token']))
+            if (empty($container['twilio.auth_token']))
             {
                 throw new \Exception('twilio.auth_token is not defined!');
             }
 
-            return new Client($app['twilio.sid'], $app['twilio.auth_token']);
+            return new Client($container['twilio.sid'], $container['twilio.auth_token']);
         });
 
-        $app['twilio.twiml'] = $app->share(function () use ($app) {
+        $container['twilio.twiml'] = $container->protect(function () use ($container) {
             return new Twiml;
         });
-    }
-
-    public function register(Application $app)
-    {
 
     }
 }
